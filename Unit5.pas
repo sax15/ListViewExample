@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
-  FMX.ListView, FMX.Layouts, FMX.Controls.Presentation, FMX.StdCtrls;
+  FMX.ListView, FMX.Layouts, FMX.Controls.Presentation, FMX.StdCtrls,
+  System.ImageList, FMX.ImgList;
 
 type
   TfrmMain = class(TForm)
@@ -16,6 +17,8 @@ type
     cb3D: TCheckBox;
     StyleBook1: TStyleBook;
     chbEditMode: TCheckBox;
+    ImageControl1: TImageControl;
+    imlTransportTypeColor: TImageList;
     procedure FormCreate(Sender: TObject);
     procedure cb3DChange(Sender: TObject);
     procedure chbEditModeClick(Sender: TObject);
@@ -52,7 +55,9 @@ procedure TfrmMain.FormCreate(Sender: TObject);
 var
   i: Integer;
   AItem: TListViewItem;
+  imgSize: TSizeF;
 begin
+  imgSize.Create(40, 40); // Velikost slike tipa transporta
   for i := 0 to 20 do
   begin
     AItem := livTest.Items.Add;
@@ -62,7 +67,8 @@ begin
       AItem.Purpose := TListItemPurpose.Header;
     end else
     begin
-      AItem.Text := ' Item' + IntToStr(i);
+      AItem.Data['Text1'] := ' Item' + IntToStr(i);
+      AItem.Data['Image2'] := imlTransportTypeColor.Bitmap(imgSize, 5);  // prikaži sliko tipa transporta
     end;
 
   end;
