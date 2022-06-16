@@ -15,10 +15,10 @@ type
     layButton: TLayout;
     livTest: TListView;
     cb3D: TCheckBox;
-    StyleBook1: TStyleBook;
     chbEditMode: TCheckBox;
     ImageControl1: TImageControl;
     imlTransportTypeColor: TImageList;
+    StyleBook1: TStyleBook;
     procedure FormCreate(Sender: TObject);
     procedure cb3DChange(Sender: TObject);
     procedure chbEditModeClick(Sender: TObject);
@@ -34,12 +34,19 @@ var
 implementation
 
 {$R *.fmx}
+{$R *.XLgXhdpiTb.fmx ANDROID}
 
 procedure TfrmMain.cb3DChange(Sender: TObject);
 begin
   if cb3D.IsChecked then
-    livTest.StyleLookup := 'livTestStyle3D'
-  else
+  begin
+    {$IFDEF MSWINDOWS}
+      livTest.StyleLookup := 'livTestStyleWin3D';
+    {$ENDIF}
+    {$IFDEF ANDROID}
+      livTest.StyleLookup := 'livTestStyleAndroid3D';
+    {$ENDIF}
+  end else
     livTest.StyleLookup := '';
 end;
 
@@ -57,6 +64,7 @@ var
   AItem: TListViewItem;
   imgSize: TSizeF;
 begin
+  randomize();
   imgSize.Create(40, 40); // Velikost slike tipa transporta
   for i := 0 to 20 do
   begin
@@ -68,7 +76,7 @@ begin
     end else
     begin
       AItem.Data['Text1'] := ' Item' + IntToStr(i);
-      AItem.Data['Image2'] := imlTransportTypeColor.Bitmap(imgSize, 5);  // prikaži sliko tipa transporta
+      AItem.Data['Image2'] := imlTransportTypeColor.Bitmap(imgSize, random(17)+1);  // prikaži sliko tipa transporta
     end;
 
   end;

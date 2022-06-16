@@ -1,0 +1,20 @@
+inherited frmMain_XLgXhdpiTb: TfrmMain_XLgXhdpiTb
+  ClientHeight = 1255
+  ClientWidth = 800
+  DesignerMasterStyle = 3
+  inherited layListView: TLayout
+    Size.Width = 800.000000000000000000
+    Size.Height = 1205.000000000000000000
+    inherited livTest: TListView
+      Size.Width = 800.000000000000000000
+      Size.Height = 1205.000000000000000000
+    end
+  end
+  inherited layButton: TLayout
+    Position.Y = 1205.000000000000000000
+    Size.Width = 800.000000000000000000
+    inherited chbEditMode: TCheckBox
+      Position.X = 675.000000000000000000
+    end
+  end
+end
